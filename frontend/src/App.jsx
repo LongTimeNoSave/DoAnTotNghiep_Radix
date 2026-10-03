@@ -61,41 +61,42 @@ function App() {
 {/*  Trailing Action Section  */}
 <div className="flex items-center justify-end gap-4 flex-shrink-0">
 
-{/*  Icon Actions  */}
-<div className="flex items-center gap-1 border-x border-surface-variant px-2">
-<button aria-label="Thông báo" className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" type="button">
-<span className="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
-</button>
-<button aria-label="Trợ giúp" className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" type="button">
-<span className="material-symbols-outlined text-xl" data-icon="help">help</span>
-</button>
-</div>
-{/*  Auth Button  */}
+{/*  Auth & Icon Actions  */}
 {userEmail ? (
-  <div className="relative">
-    <button 
-      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-      className="flex items-center gap-1.5 text-sm font-label font-semibold text-primary hover:text-primary-fixed-dim px-3 py-2 transition-colors"
-    >
-      <span className="material-symbols-outlined text-xl" data-icon="account_circle">account_circle</span>
-      {userEmail}
-      <span className="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
-    </button>
-    
-    {isDropdownOpen && (
-      <div className="absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-surface-variant rounded-xl shadow-lg py-2 z-50 flex flex-col overflow-hidden">
-        <Link to="/profile" className="px-4 py-2.5 text-sm font-medium text-on-surface hover:bg-surface-container transition-colors text-left flex items-center gap-2">
-          <span className="material-symbols-outlined text-[18px]">person</span> Thông tin tài khoản
-        </Link>
-        <Link to="/change-password" className="px-4 py-2.5 text-sm font-medium text-on-surface hover:bg-surface-container transition-colors text-left flex items-center gap-2">
-          <span className="material-symbols-outlined text-[18px]">lock</span> Đổi mật khẩu
-        </Link>
-        <div className="border-t border-surface-variant my-1"></div>
-        <button onClick={handleLogout} className="px-4 py-2.5 text-sm font-semibold text-error hover:bg-error/10 transition-colors text-left flex items-center gap-2">
-          <span className="material-symbols-outlined text-[18px]">logout</span> Đăng xuất
-        </button>
-      </div>
-    )}
+  <div className="flex items-center gap-2">
+    {/* Notification Icon */}
+    <div className="flex items-center border-r border-surface-variant pr-2 mr-1">
+      <button aria-label="Thông báo" className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" type="button">
+        <span className="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+      </button>
+    </div>
+
+    {/* User Dropdown */}
+    <div className="relative">
+      <button 
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        className="flex items-center gap-1.5 text-sm font-label font-semibold text-primary hover:text-primary-fixed-dim px-3 py-2 transition-colors"
+      >
+        <span className="material-symbols-outlined text-xl" data-icon="account_circle">account_circle</span>
+        {userEmail}
+        <span className="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+      </button>
+      
+      {isDropdownOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-surface-variant rounded-xl shadow-lg py-2 z-50 flex flex-col overflow-hidden">
+          <Link to="/profile" className="px-4 py-2.5 text-sm font-medium text-on-surface hover:bg-surface-container transition-colors text-left flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">person</span> Thông tin tài khoản
+          </Link>
+          <Link to="/change-password" className="px-4 py-2.5 text-sm font-medium text-on-surface hover:bg-surface-container transition-colors text-left flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">lock</span> Đổi mật khẩu
+          </Link>
+          <div className="border-t border-surface-variant my-1"></div>
+          <button onClick={handleLogout} className="px-4 py-2.5 text-sm font-semibold text-error hover:bg-error/10 transition-colors text-left flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">logout</span> Đăng xuất
+          </button>
+        </div>
+      )}
+    </div>
   </div>
 ) : (
   <Link to="/login" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-label font-semibold text-on-surface-variant hover:text-primary px-3 py-2 transition-colors">
