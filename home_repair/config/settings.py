@@ -40,13 +40,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
+    'users',
+    'orders',
+    'matching',
+    'pricing',
+    'reputation',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -140,3 +147,26 @@ import os
 GDAL_LIBRARY_PATH = r'C:\Program Files\PostgreSQL\18\bin\libgdal-35.dll'
 GEOS_LIBRARY_PATH = r'C:\Program Files\PostgreSQL\18\bin\libgeos_c.dll'
 os.environ['PATH'] += r';C:\Program Files\PostgreSQL\18\bin'
+
+# Cho phép Frontend ở cổng 5173 (Vite) gọi API tới Django
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+# Cấu hình Django Rest Framework sử dụng JWT làm phương thức xác thực mặc định
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+# (Tuỳ chọn) Thiết lập thời gian hết hạn của token
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1), # Access token sống 1 ngày
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7), # Refresh token sống 7 ngày
+}
+
+
+AUTH_USER_MODEL = "users.User"

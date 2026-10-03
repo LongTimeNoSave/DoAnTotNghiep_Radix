@@ -17,11 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import JsonResponse
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 def ping(request):
     return JsonResponse({"message": "Pong từ Django Backend!", "status": "success"})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/ping/', ping),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # API Làm mới: Đổi Refresh Token lấy Access Token mới
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+

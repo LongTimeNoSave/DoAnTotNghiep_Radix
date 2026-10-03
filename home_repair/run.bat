@@ -1,0 +1,3 @@
+@echo off
+echo Dang khoi dong Django Server trong moi truong ao...
+.\venv\Scripts\python.exe manage.py runserver
